@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table (name = "Aerolinea")
+@Table (name = "aerolinea")
 @Getter
 @Setter
 @NoArgsConstructor

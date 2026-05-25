@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Entity
-@Table (name = "Avion")
+@Table (name = "avion")
 @Getter
 @Setter
 @NoArgsConstructor

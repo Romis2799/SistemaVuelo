@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Cuidad")
+@Table(name = "ciudad")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cuidad extends BaseEntity{
+public class Ciudad extends BaseEntity{
 
-    @Column (name = "nombre_cuidad" )
+    @Column (name = "nombre_ciudad" )
     private String nombreCuidad;
 
 }

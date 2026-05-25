@@ -8,18 +8,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Aeropuerto")
+@Table(name = "aeropuerto")
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Aeropuerto extends BaseEntity {
 
-    @Column(name = "nombre_aerouerto")
-    private String nombreAeroperto;
+    @Column(name = "nombre_aeropuerto")
+    private String nombreAeropuerto;
 
     @ManyToOne
-    @JoinColumn(name= "cuidad_id")
-    private Cuidad cuidad;
+    @JoinColumn(name= "ciudad_id")
+    private Ciudad ciudad;
 
 
 }

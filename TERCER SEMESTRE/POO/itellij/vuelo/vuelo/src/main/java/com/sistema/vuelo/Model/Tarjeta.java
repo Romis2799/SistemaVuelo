@@ -8,7 +8,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table (name = "Tarjeta")
+@Table (name = "tarjeta")
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
