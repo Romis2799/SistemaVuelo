@@ -8,4 +8,6 @@ import java.io.Serializable;
 
 @NoRepositoryBean
 public interface BaseRepository<E extends BaseEntity, Id extends Serializable> extends JpaRepository<E,Id> {
+
+
 }

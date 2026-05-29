@@ -44,5 +44,7 @@ public class Vuelo extends BaseEntity{
             inverseJoinColumns = @JoinColumn(name = "tarifa_id"))
     private List <Tarifa> tarifas = new ArrayList<>();
 
-
+    @ManyToOne
+    @JoinColumn(name = "avion_id")
+    private Avion avion;
 }
