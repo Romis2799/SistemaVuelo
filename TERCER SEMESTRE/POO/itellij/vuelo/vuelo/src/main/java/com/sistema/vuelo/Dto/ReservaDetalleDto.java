@@ -16,9 +16,9 @@ public class ReservaDetalleDto {
 
 
     //datos que necesito del usuario
-    private int dniUsuario;
-    private String nombreUsuario;
-    private String apellidoUsuario;
+    private int dni;
+    private String nombre;
+    private String apellido;
 
 
     //datos de la reserva
@@ -26,7 +26,7 @@ public class ReservaDetalleDto {
 
     //datos del vuelo
     private int numeroVuelo;
-    private String nombreAerolinea;
+    private String aerolinea;
 
     //datos de la tarifa
     private String claseTarifa;
@@ -34,7 +34,7 @@ public class ReservaDetalleDto {
 
     //datos del aeropuerto y cuidad
     private String nombreAeropuerto;
-    private String nombreCiudad;
+    private String ciudad;
 
     //datos del asiento
     private int numeroAsiento;

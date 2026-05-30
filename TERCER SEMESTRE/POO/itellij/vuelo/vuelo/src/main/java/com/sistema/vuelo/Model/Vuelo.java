@@ -32,7 +32,7 @@ public class Vuelo extends BaseEntity{
     @JoinColumn (name = "aerolinea_id", nullable = false)
     private Aerolinea aerolinea;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable ( name = "vuelo_aeropuerto",
                  joinColumns = @JoinColumn (name = "vuelo_id"),
                 inverseJoinColumns = @JoinColumn(name = "aeropuerto_id"))

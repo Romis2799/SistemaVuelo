@@ -14,9 +14,9 @@ public class ConsultaDetalleDto {
 
     //datos que necesito del usuario
 
-    private int dniUsuario;
-    private String nombreUsuario;
-    private String apellidoUsuario;
+    private int dni;
+    private String nombre;
+    private String apellido;
 
     //datos que necesito de la consulta
 
@@ -25,7 +25,7 @@ public class ConsultaDetalleDto {
     //datos que necesito del vuelo
 
     private int numeroVuelo;
-    private String nombreAerolinea;
+    private String aerolinea;
 
     //datos que necesito de la tarifa
 
@@ -35,16 +35,16 @@ public class ConsultaDetalleDto {
     //datos que necesito del aeropuerto y cuidad de destino
 
     private String nombreAeropuerto;
-    private String nombreCuidad;
+    private String cuidad;
 
     //datos del asiento
     private String claseAsiento;
 
     //datos del piloto
 
-    private int dniPiloto;
-    private String nombrePiloto;
-    private String apellidoPiloto;
+    private int dniP;
+    private String nombreP;
+    private String apellidoP;
     private int numeroPiloto;
 
     //fecha

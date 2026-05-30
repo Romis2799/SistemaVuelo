@@ -29,16 +29,16 @@ public class ConsultaServiceImpl extends BaseServiceImpl<Consulta, Long> impleme
             ConsultaDetalleDto dto = new ConsultaDetalleDto();
 
             //usuario
-            dto.setDniUsuario(consulta.getUsuario().getDni());
-            dto.setNombreUsuario(consulta.getUsuario().getNombre());
-            dto.setApellidoUsuario(consulta.getUsuario().getApellido());
+            dto.setDni(consulta.getUsuario().getDni());
+            dto.setNombre(consulta.getUsuario().getNombre());
+            dto.setApellido(consulta.getUsuario().getApellido());
 
             //consulta
             dto.setNumeroConsulta(consulta.getNumeroConsulta());
 
             //vuelo
             dto.setNumeroVuelo(consulta.getVuelo().getNumeroVuelo());
-            dto.setNombreAerolinea(consulta.getVuelo().getAerolinea().getNombreAerolinea());
+            dto.setAerolinea(consulta.getVuelo().getAerolinea().getNombreAerolinea());
 
 
             //tarifa
@@ -48,7 +48,7 @@ public class ConsultaServiceImpl extends BaseServiceImpl<Consulta, Long> impleme
             //aeropuerto, cuidad
             int ultimoAeropuerto = consulta.getVuelo().getAeropuertos().size() -1;
             dto.setNombreAeropuerto(consulta.getVuelo().getAeropuertos().get(ultimoAeropuerto).getNombreAeropuerto());
-            dto.setNombreCuidad(consulta.getVuelo().getAeropuertos().get(ultimoAeropuerto).getNombreAeropuerto());
+            dto.setCuidad(consulta.getVuelo().getAeropuertos().get(ultimoAeropuerto).getCiudad().getNombreCuidad());
 
 
             //asiento
@@ -59,9 +59,9 @@ public class ConsultaServiceImpl extends BaseServiceImpl<Consulta, Long> impleme
 
             //piloto
             dto.setNumeroPiloto(consulta.getVuelo().getPiloto().getNumeroPiloto());
-            dto.setNombrePiloto(consulta.getVuelo().getPiloto().getNombre());
-            dto.setApellidoPiloto(consulta.getVuelo().getPiloto().getApellido());
-            dto.setDniPiloto(consulta.getVuelo().getPiloto().getDni());
+            dto.setNombreP(consulta.getVuelo().getPiloto().getNombre());
+            dto.setApellidoP(consulta.getVuelo().getPiloto().getApellido());
+            dto.setDniP(consulta.getVuelo().getPiloto().getDni());
 
             //
             return dto;
