@@ -16,7 +16,7 @@ import lombok.Setter;
 public class Pago extends BaseEntity {
 
     @Column(name = "nro_pago")
-    private int nroPago;
+    private Long nroPago;
 
     @Column (name = "cantidad_pago")
     private int cantidadPago;

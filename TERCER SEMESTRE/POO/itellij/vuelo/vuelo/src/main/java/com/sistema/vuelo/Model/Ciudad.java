@@ -18,6 +18,6 @@ import lombok.Setter;
 public class Ciudad extends BaseEntity{
 
     @Column (name = "nombre_ciudad" )
-    private String nombreCuidad;
+    private String nombreCiudad;
 
 }

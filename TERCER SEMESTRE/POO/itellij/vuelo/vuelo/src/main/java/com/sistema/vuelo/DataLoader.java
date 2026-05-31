@@ -5,6 +5,8 @@ import com.sistema.vuelo.Repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.*;
+
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -12,7 +14,6 @@ public class DataLoader implements CommandLineRunner {
     private final AerolineaRepository aerolineaRepository;
     private final AeropuertoRepository aeropuertoRepository;
     private final AvionRepository avionRepository;
-    private final AsientoRepository asientoRepository;
     private final FechaRepository fechaRepository;
     private final PilotoRepository pilotoRepository;
     private final TarifaRepository tarifaRepository;
@@ -23,7 +24,6 @@ public class DataLoader implements CommandLineRunner {
                       AerolineaRepository aerolineaRepository,
                       AeropuertoRepository aeropuertoRepository,
                       AvionRepository avionRepository,
-                      AsientoRepository asientoRepository,
                       FechaRepository fechaRepository,
                       PilotoRepository pilotoRepository,
                       TarifaRepository tarifaRepository,
@@ -33,7 +33,6 @@ public class DataLoader implements CommandLineRunner {
         this.aerolineaRepository = aerolineaRepository;
         this.aeropuertoRepository = aeropuertoRepository;
         this.avionRepository = avionRepository;
-        this.asientoRepository = asientoRepository;
         this.fechaRepository = fechaRepository;
         this.pilotoRepository = pilotoRepository;
         this.tarifaRepository = tarifaRepository;
@@ -43,143 +42,197 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        // Solo carga datos si la base está vacía
         if (ciudadRepository.count() > 0) return;
 
-        // Ciudades
-        Ciudad mendoza = new Ciudad();
-        mendoza.setNombreCuidad("Mendoza");
-        ciudadRepository.save(mendoza);
+        // =====================
+        // CIUDADES Y AEROPUERTOS
+        // =====================
+        String[][] ciudadesYAeropuertos = {
+                {"Mendoza", "Aeropuerto El Plumerillo"},
+                {"Buenos Aires", "Aeropuerto Internacional Ezeiza"},
+                {"Córdoba", "Aeropuerto Internacional Córdoba"},
+                {"Rosario", "Aeropuerto Internacional Rosario"},
+                {"Salta", "Aeropuerto Internacional Martín Miguel de Güemes"},
+                {"Bariloche", "Aeropuerto Internacional Bariloche"},
+                {"Tucumán", "Aeropuerto Internacional Tucumán"},
+                {"Mar del Plata", "Aeropuerto Internacional Mar del Plata"},
+                {"Neuquén", "Aeropuerto Internacional Neuquén"},
+                {"Ushuaia", "Aeropuerto Internacional Malvinas Argentinas"}
+        };
 
-        Ciudad buenosAires = new Ciudad();
-        buenosAires.setNombreCuidad("Buenos Aires");
-        ciudadRepository.save(buenosAires);
+        List<Aeropuerto> aeropuertos = new ArrayList<>();
+        for (String[] par : ciudadesYAeropuertos) {
+            Ciudad ciudad = new Ciudad();
+            ciudad.setNombreCiudad(par[0]);
+            ciudadRepository.save(ciudad);
 
-        Ciudad cordoba = new Ciudad();
-        cordoba.setNombreCuidad("Córdoba");
-        ciudadRepository.save(cordoba);
+            Aeropuerto aeropuerto = new Aeropuerto();
+            aeropuerto.setNombreAeropuerto(par[1]);
+            aeropuerto.setCiudad(ciudad);
+            aeropuertoRepository.save(aeropuerto);
+            aeropuertos.add(aeropuerto);
+        }
 
-        // Aeropuertos
-        Aeropuerto aerMendoza = new Aeropuerto();
-        aerMendoza.setNombreAeropuerto("Aeropuerto El Plumerillo");
-        aerMendoza.setCiudad(mendoza);
-        aeropuertoRepository.save(aerMendoza);
+        // =====================
+        // AEROLINEAS
+        // =====================
+        String[] nombresAerolineas = {
+                "Aerolíneas Argentinas", "LATAM", "Flybondi"
+        };
+        List<Aerolinea> aerolineas = new ArrayList<>();
+        for (String nombre : nombresAerolineas) {
+            Aerolinea a = new Aerolinea();
+            a.setNombreAerolinea(nombre);
+            aerolineaRepository.save(a);
+            aerolineas.add(a);
+        }
 
-        Aeropuerto aerEzeiza = new Aeropuerto();
-        aerEzeiza.setNombreAeropuerto("Aeropuerto Internacional Ezeiza");
-        aerEzeiza.setCiudad(buenosAires);
-        aeropuertoRepository.save(aerEzeiza);
+        // =====================
+        // AVIONES (uno por aerolinea, 12 asientos cada uno)
+        // =====================
+        String[] tiposAvion = {"Boeing 737", "Airbus A320", "Embraer E190"};
+        String[] tiposTurbina = {"Turbofan CFM56", "Turbofan CFM LEAP", "Turbofan GE CF34"};
+        List<Avion> aviones = new ArrayList<>();
 
-        Aeropuerto aerCordoba = new Aeropuerto();
-        aerCordoba.setNombreAeropuerto("Aeropuerto Internacional Córdoba");
-        aerCordoba.setCiudad(cordoba);
-        aeropuertoRepository.save(aerCordoba);
+        for (int i = 0; i < 3; i++) {
+            Avion avion = new Avion();
+            avion.setTipoAvion(tiposAvion[i]);
+            avion.setTipoTurbina(tiposTurbina[i]);
 
-        // Aerolineas
-        Aerolinea aerolinea1 = new Aerolinea();
-        aerolinea1.setNombreAerolinea("Aerolíneas Argentinas");
-        aerolineaRepository.save(aerolinea1);
+            // 4 filas × 3 letras = 12 asientos
+            // letra A → BUSINESS, B → ECONOMY, C → TURISTA
+            for (int fila = 1; fila <= 4; fila++) {
+                Asiento a = new Asiento();
+                a.setFilaAsiento(fila);
+                a.setLetraAsiento('A');
+                a.setClaseAsiento(Clase.BUSINESS);
+                avion.getAsientos().add(a);
 
-        Aerolinea aerolinea2 = new Aerolinea();
-        aerolinea2.setNombreAerolinea("LATAM");
-        aerolineaRepository.save(aerolinea2);
+                Asiento b = new Asiento();
+                b.setFilaAsiento(fila);
+                b.setLetraAsiento('B');
+                b.setClaseAsiento(Clase.ECONOMY);
+                avion.getAsientos().add(b);
 
-        // Pilotos
-        Piloto piloto1 = new Piloto();
-        piloto1.setDni(20111222);
-        piloto1.setNombre("Carlos");
-        piloto1.setApellido("Rodríguez");
-        piloto1.setNumeroPiloto(1001);
-        pilotoRepository.save(piloto1);
+                Asiento c = new Asiento();
+                c.setFilaAsiento(fila);
+                c.setLetraAsiento('C');
+                c.setClaseAsiento(Clase.TURISTA);
+                avion.getAsientos().add(c);
+            }
+            avionRepository.save(avion);
+            aviones.add(avion);
+        }
 
-        Piloto piloto2 = new Piloto();
-        piloto2.setDni(20333444);
-        piloto2.setNombre("Laura");
-        piloto2.setApellido("Gómez");
-        piloto2.setNumeroPiloto(1002);
-        pilotoRepository.save(piloto2);
+        // =====================
+        // TARIFAS (una por clase por aerolinea)
+        // =====================
+        int[][] precios = {
+                {45000, 25000, 15000},  // Aerolíneas Argentinas
+                {42000, 22000, 13000},  // LATAM
+                {35000, 18000, 10000}   // Flybondi
+        };
 
-        // Aviones con asientos
-        Avion avion1 = new Avion();
-        avion1.setTipoTurbina("Turbofan");
-        avion1.setTipoAvion("Boeing 737");
+        List<List<Tarifa>> tarifasPorAerolinea = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            List<Tarifa> tarifas = new ArrayList<>();
 
-        Asiento a1 = new Asiento();
-        a1.setFilaAsiento(1);
-        a1.setLetraAsiento('A');
-        a1.setClaseAsiento(Clase.BUSINESS);
+            Tarifa tb = new Tarifa();
+            tb.setClaseTarifa(Clase.BUSINESS);
+            tb.setPrecioTarifa(precios[i][0]);
+            tb.setImpuestoTarifa(21);
+            tarifaRepository.save(tb);
+            tarifas.add(tb);
 
-        Asiento a2 = new Asiento();
-        a2.setFilaAsiento(2);
-        a2.setLetraAsiento('B');
-        a2.setClaseAsiento(Clase.ECONOMY);
+            Tarifa te = new Tarifa();
+            te.setClaseTarifa(Clase.ECONOMY);
+            te.setPrecioTarifa(precios[i][1]);
+            te.setImpuestoTarifa(21);
+            tarifaRepository.save(te);
+            tarifas.add(te);
 
-        avion1.getAsientos().add(a1);
-        avion1.getAsientos().add(a2);
-        avionRepository.save(avion1);
+            Tarifa tt = new Tarifa();
+            tt.setClaseTarifa(Clase.TURISTA);
+            tt.setPrecioTarifa(precios[i][2]);
+            tt.setImpuestoTarifa(21);
+            tarifaRepository.save(tt);
+            tarifas.add(tt);
 
-        Avion avion2 = new Avion();
-        avion2.setTipoTurbina("Turbohélice");
-        avion2.setTipoAvion("Airbus A320");
+            tarifasPorAerolinea.add(tarifas);
+        }
 
-        Asiento a3 = new Asiento();
-        a3.setFilaAsiento(1);
-        a3.setLetraAsiento('A');
-        a3.setClaseAsiento(Clase.TURISTA);
+        // =====================
+        // PILOTOS
+        // =====================
+        String[][] nombresPilotos = {
+                {"Carlos", "Rodríguez"}, {"Laura", "Gómez"}, {"Martín", "López"},
+                {"Sofía", "Fernández"}, {"Diego", "Martínez"}, {"Ana", "García"},
+                {"Pablo", "Pérez"}, {"Lucía", "Torres"}, {"Andrés", "Ramírez"},
+                {"Valeria", "Sánchez"}, {"Federico", "Herrera"}, {"Natalia", "Castro"},
+                {"Gustavo", "Morales"}, {"Cecilia", "Jiménez"}, {"Roberto", "Díaz"},
+                {"Marina", "Ruiz"}, {"Sebastián", "Vargas"}, {"Patricia", "Mendoza"},
+                {"Nicolás", "Vega"}, {"Claudia", "Reyes"}
+        };
 
-        avion2.getAsientos().add(a3);
-        avionRepository.save(avion2);
+        List<Piloto> pilotos = new ArrayList<>();
+        for (int i = 0; i < nombresPilotos.length; i++) {
+            Piloto p = new Piloto();
+            p.setNombre(nombresPilotos[i][0]);
+            p.setApellido(nombresPilotos[i][1]);
+            p.setDni(20000000 + (i * 1111111));
+            p.setNumeroPiloto(1001 + i);
+            pilotoRepository.save(p);
+            pilotos.add(p);
+        }
 
-        // Fechas
-        Fecha fecha1 = new Fecha();
-        fecha1.setFecha(new java.util.Date());
-        fechaRepository.save(fecha1);
+        // =====================
+        // FECHAS (próximos 30 días)
+        // =====================
+        List<Fecha> fechas = new ArrayList<>();
+        Calendar cal = Calendar.getInstance();
+        for (int i = 1; i <= 30; i++) {
+            cal.setTime(new Date());
+            cal.add(Calendar.DAY_OF_MONTH, i);
+            Fecha f = new Fecha();
+            f.setFecha(cal.getTime());
+            fechaRepository.save(f);
+            fechas.add(f);
+        }
 
-        Fecha fecha2 = new Fecha();
-        java.util.Calendar cal = java.util.Calendar.getInstance();
-        cal.add(java.util.Calendar.DAY_OF_MONTH, 7);
-        fecha2.setFecha(cal.getTime());
-        fechaRepository.save(fecha2);
+        // =====================
+        // VUELOS
+        // 10 ciudades × 9 destinos × 3 aerolineas = 270 vuelos
+        // =====================
+        int numeroVuelo = 1001;
+        int pilotoIndex = 0;
+        int fechaIndex = 0;
 
-        // Tarifas
-        Tarifa tarifa1 = new Tarifa();
-        tarifa1.setImpuestoTarifa(21);
-        tarifa1.setPrecioTarifa(15000);
-        tarifa1.setClaseTarifa(Clase.ECONOMY);
-        tarifaRepository.save(tarifa1);
+        for (int origen = 0; origen < aeropuertos.size(); origen++) {
+            for (int destino = 0; destino < aeropuertos.size(); destino++) {
+                if (origen == destino) continue;
 
-        Tarifa tarifa2 = new Tarifa();
-        tarifa2.setImpuestoTarifa(21);
-        tarifa2.setPrecioTarifa(35000);
-        tarifa2.setClaseTarifa(Clase.BUSINESS);
-        tarifaRepository.save(tarifa2);
+                for (int aerolineaIdx = 0; aerolineaIdx < aerolineas.size(); aerolineaIdx++) {
+                    Vuelo vuelo = new Vuelo();
+                    vuelo.setNumeroVuelo(numeroVuelo++);
+                    vuelo.setAerolinea(aerolineas.get(aerolineaIdx));
+                    vuelo.setAvion(aviones.get(aerolineaIdx));
+                    vuelo.setPiloto(pilotos.get(pilotoIndex % pilotos.size()));
+                    vuelo.setFecha(fechas.get(fechaIndex % fechas.size()));
+                    vuelo.getAeropuertos().add(aeropuertos.get(origen));
+                    vuelo.getAeropuertos().add(aeropuertos.get(destino));
+                    vuelo.getTarifas().addAll(tarifasPorAerolinea.get(aerolineaIdx));
 
-        // Vuelos
-        Vuelo vuelo1 = new Vuelo();
-        vuelo1.setNumeroVuelo(101);
-        vuelo1.setAerolinea(aerolinea1);
-        vuelo1.setPiloto(piloto1);
-        vuelo1.setAvion(avion1);
-        vuelo1.setFecha(fecha1);
-        vuelo1.getAeropuertos().add(aerMendoza);
-        vuelo1.getAeropuertos().add(aerEzeiza);
-        vuelo1.getTarifas().add(tarifa1);
-        vuelo1.getTarifas().add(tarifa2);
-        vueloRepository.save(vuelo1);
+                    vueloRepository.save(vuelo);
 
-        Vuelo vuelo2 = new Vuelo();
-        vuelo2.setNumeroVuelo(102);
-        vuelo2.setAerolinea(aerolinea2);
-        vuelo2.setPiloto(piloto2);
-        vuelo2.setAvion(avion2);
-        vuelo2.setFecha(fecha2);
-        vuelo2.getAeropuertos().add(aerMendoza);
-        vuelo2.getAeropuertos().add(aerCordoba);
-        vuelo2.getTarifas().add(tarifa1);
-        vueloRepository.save(vuelo2);
+                    pilotoIndex++;
+                    fechaIndex++;
+                }
+            }
+        }
 
-        // Usuarios
+        // =====================
+        // USUARIOS DE PRUEBA
+        // =====================
         Usuario usuario1 = new Usuario();
         usuario1.setDni(12345678);
         usuario1.setNombre("Ana");
@@ -198,6 +251,11 @@ public class DataLoader implements CommandLineRunner {
         usuario2.setNroUsuario(2);
         usuarioRepository.save(usuario2);
 
-        System.out.println("Datos de prueba cargados correctamente");
+        System.out.println(" Datos de prueba cargados: " +
+                aeropuertos.size() + " aeropuertos, " +
+                aerolineas.size() + " aerolíneas, " +
+                "270 vuelos, " +
+                pilotos.size() + " pilotos, " +
+                "3 aviones con 12 asientos c/u");
     }
 }

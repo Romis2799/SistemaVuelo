@@ -48,7 +48,7 @@ public class ConsultaServiceImpl extends BaseServiceImpl<Consulta, Long> impleme
             //aeropuerto, cuidad
             int ultimoAeropuerto = consulta.getVuelo().getAeropuertos().size() -1;
             dto.setNombreAeropuerto(consulta.getVuelo().getAeropuertos().get(ultimoAeropuerto).getNombreAeropuerto());
-            dto.setCuidad(consulta.getVuelo().getAeropuertos().get(ultimoAeropuerto).getCiudad().getNombreCuidad());
+            dto.setCuidad(consulta.getVuelo().getAeropuertos().get(ultimoAeropuerto).getCiudad().getNombreCiudad());
 
 
             //asiento

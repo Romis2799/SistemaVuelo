@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Tarjeta extends Pago {
 
     @Column (name = "nro_tarjeta")
-    private int nroTarjeta;
+    private Long nroTarjeta;
 
     @Enumerated(EnumType.STRING)
     @Column (name = "tipo_tarjeta")

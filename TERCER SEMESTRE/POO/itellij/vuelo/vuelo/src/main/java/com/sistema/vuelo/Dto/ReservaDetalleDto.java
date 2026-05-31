@@ -48,12 +48,12 @@ public class ReservaDetalleDto {
     private String fechaVuelo;
 
     //datos de la tarjeta
-    private int numeroTarjeta;
+    private Long numeroTarjeta;
     private String tipoTarjeta;
 
 
     // datos del pago
-    private int numeroPago;
+    private Long numeroPago;
 
 
 

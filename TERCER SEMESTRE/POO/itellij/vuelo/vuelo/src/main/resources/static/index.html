@@ -3,31 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Vuelos</title>
+    <title>RAM Tech Travel</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<div class="container">
-    <header>
-        <h1> Sistema de Reserva de Vuelos</h1>
-        <p>Bienvenido al sistema de gestión de vuelos</p>
-    </header>
 
-    <main class="menu-principal">
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="page-header" style="display: flex; align-items: center; gap: 30px; text-align: left;">
+        <img src="img/RAM.png" alt="RAM Tech Travel" style="height: 140px; width: auto; background-color: #FFF1F1; border-radius: 12px; padding: 6px;">
+        <div>
+            <h1>Bienvenido a <span>RAM Tech Travel</span></h1>
+            <p>Tu agencia de viajes online. Consultá y reservá tu vuelo en minutos.</p>
+        </div>
+    </div>
+
+    <!-- MENÚ PRINCIPAL -->
+    <div class="menu-principal">
+
         <div class="card" onclick="window.location.href='consulta.html'">
-            <div class="card-icon">🔍</div>
+            <img src="img/consulta.png" alt="Consulta" class="card-icon">
             <h2>Consulta</h2>
-            <p>Consultá tus vuelos y reservas por DNI</p>
-            <button class="btn btn-consulta">Ir a Consulta</button>
+            <p>Buscá tus reservas y vuelos por DNI</p>
+            <button class="btn btn-secondary">
+                Ver mis reservas
+            </button>
         </div>
 
         <div class="card" onclick="window.location.href='reserva.html'">
-            <div class="card-icon">🎫</div>
+            <img src="img/reserva.png" alt="Reserva" class="card-icon">
             <h2>Reserva</h2>
-            <p>Realizá una nueva reserva de vuelo</p>
-            <button class="btn btn-reserva">Ir a Reserva</button>
+            <p>Elegí tu destino y reservá tu próximo vuelo</p>
+            <button class="btn btn-primary">
+                Reservar vuelo
+            </button>
         </div>
-    </main>
+
+    </div>
+
 </div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    © 2026 <span>RAM Tech Travel</span> — Todos los derechos reservados
+</footer>
+
 </body>
 </html>

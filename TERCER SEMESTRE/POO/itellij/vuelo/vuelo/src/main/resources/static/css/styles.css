@@ -6,33 +6,132 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    background-color: #FFFFFF;
+    color: #1A1A1A;
     min-height: 100vh;
-    color: #fff;
 }
 
+/* =====================
+   HEADER / NAVBAR
+   ===================== */
+.navbar {
+    background-color: #FFFFFF;
+    border-bottom: 2px solid #FFF1F1;
+    padding: 15px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(247, 37, 133, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.navbar-logo img {
+    height: 60px;
+    width: auto;
+    background-color: #FFF1F1;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.navbar-back {
+    color: #888888;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+}
+
+.navbar-back:hover {
+    color: #F72585;
+}
+
+/* =====================
+   CONTENEDOR PRINCIPAL
+   ===================== */
 .container {
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 40px 20px;
 }
 
-header {
+/* =====================
+   HERO / HEADER DE PÁGINA
+   ===================== */
+.page-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 48px;
+    padding: 10px 10px;
+    background: #FFF1F1 ;
+    border-radius: 16px;
+    border: 1px solid #FFD6E7;
 }
 
-header h1 {
-    font-size: 2.5rem;
+.page-header h1 {
+    font-size: 2rem;
+    color: #1A1A1A;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.page-header h1 span {
+    color: #F72585;
+}
+
+.page-header p {
+    color: #888888;
+    font-size: 1rem;
+}
+
+/* =====================
+   CARDS
+   ===================== */
+.card {
+    background: #FFFFFF;
+    border: 1px solid #FFD6E7;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(247, 37, 133, 0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(247, 37, 133, 0.12);
+}
+
+.card-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+.card h2 {
+    font-size: 1.4rem;
     margin-bottom: 10px;
-    color: #e94560;
+    color: #1A1A1A;
 }
 
-header p {
-    font-size: 1.1rem;
-    color: #a8a8b3;
+.card p {
+    color: #888888;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
 }
 
+/* =====================
+   MENÚ PRINCIPAL
+   ===================== */
 .menu-principal {
     display: flex;
     gap: 30px;
@@ -40,65 +139,70 @@ header p {
     flex-wrap: wrap;
 }
 
-.card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 40px;
+.menu-principal .card {
     width: 300px;
     text-align: center;
     cursor: pointer;
-    transition: transform 0.3s, background 0.3s;
 }
 
-.card:hover {
-    transform: translateY(-8px);
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.card-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.card h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.card p {
-    color: #a8a8b3;
-    margin-bottom: 25px;
-    font-size: 0.95rem;
-}
-
+/* =====================
+   BOTONES
+   ===================== */
 .btn {
     padding: 12px 30px;
     border: none;
     border-radius: 8px;
     font-size: 1rem;
     cursor: pointer;
-    font-weight: bold;
-    transition: opacity 0.2s;
+    font-weight: 600;
+    transition: all 0.2s;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .btn:hover {
-    opacity: 0.85;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(247, 37, 133, 0.3);
 }
 
-.btn-consulta {
-    background: #0f3460;
-    color: #fff;
-    border: 2px solid #e94560;
+.btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
-.btn-reserva {
-    background: #e94560;
-    color: #fff;
+.btn-primary {
+    background-color: #F72585;
+    color: #FFFFFF;
 }
 
-/* Formularios */
+.btn-primary:hover {
+    background-color: #d41e72;
+}
+
+.btn-secondary {
+    background-color: #FFFFFF;
+    color: #F72585;
+    border: 2px solid #F72585;
+}
+
+.btn-secondary:hover {
+    background-color: #FFF1F1;
+}
+
+/* Compatibilidad con nombres anteriores */
+.btn-consulta { background-color: #FFFFFF; color: #F72585; border: 2px solid #F72585; }
+.btn-consulta:hover { background-color: #FFF1F1; }
+.btn-reserva { background-color: #F72585; color: #FFFFFF; }
+.btn-reserva:hover { background-color: #d41e72; }
+
+/* =====================
+   FORMULARIOS
+   ===================== */
 .form-group {
     margin-bottom: 20px;
 }
@@ -106,40 +210,53 @@ header p {
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    color: #a8a8b3;
+    color: #1A1A1A;
     font-size: 0.9rem;
+    font-weight: 600;
 }
 
 .form-group input,
 .form-group select {
     width: 100%;
     padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: #FFFFFF;
+    border: 1.5px solid #FFD6E7;
     border-radius: 8px;
-    color: #fff;
+    color: #1A1A1A;
     font-size: 1rem;
+    transition: border-color 0.2s;
 }
 
 .form-group input:focus,
 .form-group select:focus {
     outline: none;
-    border-color: #e94560;
+    border-color: #F72585;
+    box-shadow: 0 0 0 3px rgba(247, 37, 133, 0.1);
+}
+
+.form-group input:disabled,
+.form-group select:disabled {
+    background: #F5F5F5;
+    color: #888888;
+    cursor: not-allowed;
 }
 
 .form-group select option {
-    background: #1a1a2e;
-    color: #fff;
+    background: #FFFFFF;
+    color: #1A1A1A;
 }
 
-/* Tabla de resultados */
+/* =====================
+   RESULTADOS / PANELES
+   ===================== */
 .resultado {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 25px;
+    background: #FFFFFF;
+    border: 1px solid #FFD6E7;
+    border-radius: 16px;
+    padding: 30px;
     margin-top: 25px;
     display: none;
+    box-shadow: 0 4px 20px rgba(247, 37, 133, 0.06);
 }
 
 .resultado.visible {
@@ -147,16 +264,28 @@ header p {
 }
 
 .resultado h3 {
-    color: #e94560;
-    margin-bottom: 15px;
-    font-size: 1.2rem;
+    color: #F72585;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #FFF1F1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.resultado h3 img {
+    width: 22px;
+    height: 22px;
 }
 
 .dato-fila {
     display: flex;
     justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #F5F5F5;
 }
 
 .dato-fila:last-child {
@@ -164,33 +293,39 @@ header p {
 }
 
 .dato-label {
-    color: #a8a8b3;
+    color: #888888;
     font-size: 0.9rem;
 }
 
 .dato-valor {
-    color: #fff;
-    font-weight: bold;
+    color: #1A1A1A;
+    font-weight: 600;
+    font-size: 0.95rem;
 }
 
-/* Pasos del wizard */
+/* =====================
+   PASOS WIZARD
+   ===================== */
 .pasos {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-bottom: 40px;
-    gap: 10px;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .paso {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #a8a8b3;
+    color: #888888;
     font-size: 0.85rem;
+    font-weight: 500;
 }
 
 .paso.activo {
-    color: #e94560;
+    color: #F72585;
 }
 
 .paso.completado {
@@ -198,72 +333,134 @@ header p {
 }
 
 .paso-numero {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+    background: #F5F5F5;
+    border: 2px solid #FFD6E7;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
-    font-weight: bold;
+    font-size: 0.85rem;
+    font-weight: 700;
 }
 
 .paso.activo .paso-numero {
-    background: #e94560;
-    color: #fff;
+    background: #F72585;
+    color: #FFFFFF;
+    border-color: #F72585;
 }
 
 .paso.completado .paso-numero {
     background: #4caf50;
-    color: #fff;
+    color: #FFFFFF;
+    border-color: #4caf50;
 }
 
 .separador {
     width: 40px;
     height: 2px;
-    background: rgba(255, 255, 255, 0.1);
-    align-self: center;
+    background: #FFD6E7;
 }
 
-/* Mensajes de error y éxito */
+/* =====================
+   MENSAJES
+   ===================== */
 .mensaje-error {
-    background: rgba(233, 69, 96, 0.2);
-    border: 1px solid #e94560;
+    background: #FFF1F1;
+    border: 1px solid #F72585;
     border-radius: 8px;
     padding: 12px 16px;
-    color: #e94560;
+    color: #F72585;
     margin-top: 15px;
+    font-size: 0.9rem;
     display: none;
+    align-items: center;
+    gap: 8px;
 }
 
 .mensaje-exito {
-    background: rgba(76, 175, 80, 0.2);
+    background: #F0FFF4;
     border: 1px solid #4caf50;
     border-radius: 8px;
     padding: 12px 16px;
-    color: #4caf50;
+    color: #2e7d32;
     margin-top: 15px;
+    font-size: 0.9rem;
     display: none;
+    align-items: center;
+    gap: 8px;
 }
 
 .mensaje-error.visible,
 .mensaje-exito.visible {
-    display: block;
+    display: flex;
 }
 
-/* Navegacion entre paginas */
-.nav-back {
-    margin-bottom: 30px;
+/* =====================
+   CONFIRMACIÓN
+   ===================== */
+.confirmacion-header {
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
-.nav-back a {
-    color: #a8a8b3;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.2s;
+.confirmacion-header h3 {
+    color: #4caf50;
+    font-size: 1.5rem;
+    border: none !important;
 }
 
-.nav-back a:hover {
-    color: #e94560;
+.confirmacion-numero {
+    display: inline-block;
+    background: #FFF1F1;
+    color: #F72585;
+    font-size: 1.8rem;
+    font-weight: 700;
+    padding: 12px 30px;
+    border-radius: 12px;
+    margin-top: 10px;
+    border: 2px solid #FFD6E7;
+}
+
+/* =====================
+   DIVIDER
+   ===================== */
+.divider {
+    height: 1px;
+    background: #FFD6E7;
+    margin: 20px 0;
+}
+
+/* =====================
+   BADGE DE CLASE
+   ===================== */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.badge-business { background: #FFF1F1; color: #F72585; border: 1px solid #F72585; }
+.badge-economy { background: #F0F4FF; color: #3b82f6; border: 1px solid #3b82f6; }
+.badge-turista { background: #F0FFF4; color: #4caf50; border: 1px solid #4caf50; }
+
+/* =====================
+   FOOTER
+   ===================== */
+.footer {
+    text-align: center;
+    padding: 30px;
+    color: #888888;
+    font-size: 0.85rem;
+    border-top: 1px solid #FFF1F1;
+    margin-top: 60px;
+}
+
+.footer span {
+    color: #F72585;
+    font-weight: 600;
 }

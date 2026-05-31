@@ -44,7 +44,7 @@ public class ReservaServiceImpl extends BaseServiceImpl<Reserva, Long> implement
             // Datos del aeropuerto y ciudad destino
             int ultimoAeropuerto = reserva.getVuelo().getAeropuertos().size() - 1;
             dto.setNombreAeropuerto(reserva.getVuelo().getAeropuertos().get(ultimoAeropuerto).getNombreAeropuerto());
-            dto.setCiudad(reserva.getVuelo().getAeropuertos().get(ultimoAeropuerto).getCiudad().getNombreCuidad());
+            dto.setCiudad(reserva.getVuelo().getAeropuertos().get(ultimoAeropuerto).getCiudad().getNombreCiudad());
 
             // Datos del asiento
             dto.setNumeroAsiento(reserva.getVuelo().getAvion().getAsientos().get(0).getFilaAsiento());
