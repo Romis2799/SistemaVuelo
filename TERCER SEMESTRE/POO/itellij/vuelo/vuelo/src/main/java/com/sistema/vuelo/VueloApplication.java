@@ -8,7 +8,7 @@ public class VueloApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(VueloApplication.class, args);
-		System.out.println("Corriendo aplicacion");
+
 	}
 
 }
